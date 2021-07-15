@@ -37,4 +37,6 @@ test('stack: clear', () => {
 test('stack: empty', () => {
   stack.clear()
   expect(stack.toString()).toBe('')
+  expect(stack.pop()).toBe(undefined)
+  expect(stack.peek()).toBe(undefined)
 })

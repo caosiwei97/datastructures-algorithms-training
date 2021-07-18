@@ -1,4 +1,4 @@
-export default class Queue<T> {
+export default class Deque<T> {
   private items: any
   private count: number
   private lowestCount: number
@@ -9,13 +9,34 @@ export default class Queue<T> {
     this.lowestCount = 0 // 记录队列开头位置
   }
 
-  // 入队
-  enqueue(element: T) {
+  // 在双端队列前端添加新的元素。
+  addFront(element: T) {
+    // 队列为空的情况
+    if (this.isEmpty()) {
+      this.addBack(element)
+    } else if (this.lowestCount > 0) {
+      // 队列前端已经有元素删除的情况
+      this.items[--this.lowestCount] = element
+    } else {
+      // 在队列第一个位置插入
+      // 将队列往后挪一位。从后面开始循环防止数值丢失
+      for (let i = this.count; i > 0; i--) {
+        this.items[i] = this.items[i - 1]
+      }
+      // 腾出的第一位给新加入的元素
+      this.items[0] = element
+      this.lowestCount = 0
+      this.count++
+    }
+  }
+
+  // 在双端队列后端添加新的元素
+  addBack(element: T) {
     this.items[this.count++] = element
   }
 
-  // 出队
-  dequeue(): T | undefined {
+  // 从双端队列前端移除第一个元素
+  removeFront(): T | undefined {
     if (this.isEmpty()) {
       return undefined
     }
@@ -24,12 +45,29 @@ export default class Queue<T> {
     return value
   }
 
-  // 查看队列顶端元素
-  peek() {
+  removeBack(): T | undefined {
+    if (this.isEmpty()) {
+      return undefined
+    }
+    const value = this.items[this.count - 1]
+    delete this.items[--this.count]
+    return value
+  }
+
+  // 返回双端队列前端的第一个元素
+  peekFront() {
     if (this.isEmpty()) {
       return undefined
     }
     return this.items[this.lowestCount]
+  }
+
+  // 该方法返回双端队列后端的第一个元素
+  peekBack() {
+    if (this.isEmpty()) {
+      return undefined
+    }
+    return this.items[this.count - 1]
   }
 
   // 判断队列是否为空

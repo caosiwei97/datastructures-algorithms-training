@@ -1,4 +1,4 @@
-import { toBinary } from '../../../src/algorithms/stack/toBinary'
+import { toBinary } from '../../../src/index'
 
 test('tobinary:2', () => {
   expect(toBinary(10)).toBe('1010')

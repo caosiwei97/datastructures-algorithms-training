@@ -2,6 +2,7 @@ import { Compare, defaultCompare, ICompareFunction } from '../util'
 import { Node } from './models/node'
 
 type INode<T> = Node<T> | null
+type ICallback<T> = (param: T) => any
 export default class BinarySearchTree<T> {
   protected root: INode<T> = null
 
@@ -43,11 +44,11 @@ export default class BinarySearchTree<T> {
   }
 
   // 中序遍历方式遍历所有节点。
-  inOrderTraverse(callback: (param: T) => any) {
+  inOrderTraverse(callback: ICallback<T>) {
     this.inOrderTraverseNode(this.root, callback)
   }
 
-  protected inOrderTraverseNode(node: INode<T>, callback: (param: T) => any) {
+  protected inOrderTraverseNode(node: INode<T>, callback: ICallback<T>) {
     if (node !== null) {
       this.inOrderTraverseNode(node.left, callback)
       callback(node.key)
@@ -56,11 +57,11 @@ export default class BinarySearchTree<T> {
   }
 
   // 先序遍历方式遍历所有节点
-  preOrderTraverse(callback: (param: T) => any) {
+  preOrderTraverse(callback: ICallback<T>) {
     this.preOrderTraverseNode(this.root, callback)
   }
 
-  protected preOrderTraverseNode(node: INode<T>, callback: (param: T) => any) {
+  protected preOrderTraverseNode(node: INode<T>, callback: ICallback<T>) {
     if (node !== null) {
       callback(node.key)
       this.preOrderTraverseNode(node.left, callback)
@@ -69,11 +70,11 @@ export default class BinarySearchTree<T> {
   }
 
   // 后序遍历方式遍历所有节点
-  postOrderTraverse(callback: (param: T) => any) {
+  postOrderTraverse(callback: ICallback<T>) {
     this.postOrderTraverseNode(this.root, callback)
   }
 
-  protected postOrderTraverseNode(node: INode<T>, callback: (param: T) => any) {
+  protected postOrderTraverseNode(node: INode<T>, callback: ICallback<T>) {
     if (node !== null) {
       this.postOrderTraverseNode(node.left, callback)
       this.postOrderTraverseNode(node.right, callback)

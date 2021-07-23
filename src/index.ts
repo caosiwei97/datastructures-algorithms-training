@@ -8,3 +8,4 @@ export { default as BinarySearchTree } from './data-structures/BinarySearchTree'
 // algorithms
 export { toBinary } from './algorithms/stack/toBinary'
 export { hotPotato } from './algorithms/queue/hotPotato'
+export { palindromeChecker } from './algorithms/queue/palindromeChecker'

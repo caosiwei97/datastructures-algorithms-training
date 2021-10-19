@@ -1,29 +1,11 @@
+// data-structors
 export { default as StackArray } from './data-structures/StackArray'
 export { default as Stack } from './data-structures/Stack'
 export { default as Queue } from './data-structures/Queue'
 export { default as Deque } from './data-structures/Deque'
+export { default as BinarySearchTree } from './data-structures/BinarySearchTree'
 
-type MyPartial<T> = {
-  [K in keyof T]?: T[K]
-}
-
-type MyRequired<T> = {
-  [K in keyof T]-?: T[K]
-}
-
-interface Foo {
-  name: string
-  age?: number
-}
-
-const foo: MyPartial<Foo> = {
-  name: 'cao',
-  age: 12
-}
-
-const arr: Array<Required<Foo>> = [
-  {
-    name: 'cao',
-    age: 12
-  }
-]
+// algorithms
+export { toBinary } from './algorithms/stack/toBinary'
+export { hotPotato } from './algorithms/queue/hotPotato'
+export { palindromeChecker } from './algorithms/queue/palindromeChecker'
